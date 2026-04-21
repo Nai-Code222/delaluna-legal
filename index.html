@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Delaluna Answers — Legal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --night: #0d0b12;
+      --deep: #13101e;
+      --card: #1a1626;
+      --border: rgba(180, 150, 255, 0.12);
+      --moon: #c9b8f0;
+      --gold: #e8c98a;
+      --mist: rgba(201, 184, 240, 0.55);
+      --body-text: #c0b8d4;
+      --heading: #ede8f5;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--night);
+      color: var(--body-text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.8;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Stars background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 8%, rgba(255,255,255,0.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 35%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 88% 12%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 60%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 28% 75%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 93% 58%, rgba(255,255,255,0.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 6% 48%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 63% 82%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 48% 92%, rgba(255,255,255,0.25) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Glow orb ── */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(130, 80, 220, 0.18) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Header ── */
+    header {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 72px 24px 56px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .moon-icon {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 16px;
+      opacity: 0.85;
+      animation: floatMoon 5s ease-in-out infinite;
+    }
+
+    @keyframes floatMoon {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-6px); }
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 300;
+      color: var(--heading);
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+
+    header h1 span {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mist);
+    }
+
+    /* ── Nav tabs ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      padding: 14px 24px;
+      background: rgba(13, 11, 18, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav button {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--mist);
+      font-family: 'Jost', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 9px 28px;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    nav button:hover {
+      color: var(--moon);
+      border-color: var(--border);
+    }
+
+    nav button.active {
+      background: rgba(180, 130, 255, 0.12);
+      border-color: rgba(180, 130, 255, 0.35);
+      color: var(--moon);
+    }
+
+    /* ── Main layout ── */
+    main {
+      position: relative;
+      z-index: 5;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 24px 100px;
+    }
+
+    /* ── Page sections ── */
+    .page { display: none; animation: fadeIn 0.4s ease; }
+    .page.active { display: block; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Content styles ── */
+    .doc-header {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .doc-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 300;
+      color: var(--heading);
+      letter-spacing: 0.03em;
+    }
+
+    .doc-header .meta {
+      margin-top: 8px;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(180, 150, 255, 0.5);
+    }
+
+    .content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--moon);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 40px 0 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .content p {
+      margin-bottom: 14px;
+      color: var(--body-text);
+    }
+
+    .content ul, .content ol {
+      padding-left: 20px;
+      margin-bottom: 14px;
+    }
+
+    .content li {
+      margin-bottom: 6px;
+      color: var(--body-text);
+    }
+
+    .content strong {
+      color: var(--heading);
+      font-weight: 500;
+    }
+
+    .content em {
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* Highlight boxes */
+    .content .highlight-box {
+      background: rgba(180, 130, 255, 0.06);
+      border-left: 2px solid rgba(180, 130, 255, 0.4);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 20px 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      padding: 32px 24px 48px;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: rgba(180, 150, 255, 0.35);
+    }
+
+    footer a {
+      color: rgba(180, 150, 255, 0.55);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--moon); }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--night); }
+    ::-webkit-scrollbar-thumb { background: rgba(180,130,255,0.25); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="moon-icon">🌙</span>
+    <h1>Delaluna <span>Answers</span></h1>
+    <p>Legal Information &amp; Policies</p>
+  </header>
+
+  <nav>
+    <button class="active" onclick="showPage('terms', this)">Terms of Service</button>
+    <button onclick="showPage('privacy', this)">Privacy Policy</button>
+  </nav>
+
+  <main>
+
+    <!-- ── TERMS OF SERVICE ── -->
+    <section id="terms" class="page active">
+      <div class="doc-header">
+        <h2>Terms of Service</h2>
+        <div class="meta">Delaluna Answers LLC &nbsp;·&nbsp; Effective upon use</div>
+      </div>
+      <div class="content">
+
+        <h3>Acceptance</h3>
+        <p>By using the Delaluna Answers Platform provided by Delaluna Answers LLC ("Company," "we", "us"), you ("User") agree to these Terms of Service and our Privacy Policy.</p>
+
+        <h3>General</h3>
+        <p>The Company offers a mobile app and related features. Content and features may be changed at any time, without notice.</p>
+
+        <h3>Age Restriction</h3>
+        <div class="highlight-box">
+          <p>The Platform is only for U.S. users age <strong>18 and older</strong>. Do not use it if you are underage or located outside the U.S.</p>
+        </div>
+
+        <h3>Legal Compliance</h3>
+        <p>You are responsible for ensuring the Platform is legal to use in your location.</p>
+
+        <h3>For Entertainment Only</h3>
+        <div class="highlight-box">
+          <p>This app does <strong>not</strong> offer medical, legal, or psychological advice. It is <em>for entertainment only</em>.</p>
+        </div>
+
+        <h3>Third-Party Support</h3>
+        <p>We may work with third-party vendors (e.g., Firebase, payment providers). Their terms may apply as well.</p>
+
+        <h3>User Accounts</h3>
+        <p>You may be required to create an account. Do not share your login credentials. You are responsible for all activity on your account.</p>
+
+        <h3>Content Guidelines</h3>
+        <p>You must not submit abusive, illegal, or irrelevant content. You are responsible for everything you input into the Platform.</p>
+
+        <h3>Intellectual Property</h3>
+        <p>All Platform content is owned by the Company. This includes any feedback or content you provide.</p>
+        <p>You <strong>must not</strong>:</p>
+        <ul>
+          <li>Copy or reverse engineer any part of the Platform</li>
+          <li>Use our branding without permission</li>
+          <li>License, sell, or profit from Platform content</li>
+          <li>Challenge our intellectual property rights</li>
+        </ul>
+
+        <h3>Platform License</h3>
+        <p>You receive a <strong>limited, non-transferable license</strong> to use the Platform. No resale is allowed. If multiple users share one login, we may suspend your account.</p>
+
+        <h3>No Warranty</h3>
+        <p>There are <strong>no guarantees</strong> about Platform performance, reliability, or outcomes.</p>
+
+        <h3>Limitation of Liability</h3>
+        <p>We are <strong>not liable</strong> for:</p>
+        <ul>
+          <li>Indirect, special, or punitive damages</li>
+          <li>Data loss or cyberattacks</li>
+          <li>Service interruptions or third-party errors</li>
+        </ul>
+        <p>Our total liability is limited to what you paid for the service.</p>
+
+        <h3>Indemnification</h3>
+        <p>You agree to defend and hold the Company harmless against all claims arising from:</p>
+        <ul>
+          <li>Violations of this agreement</li>
+          <li>Illegal or negligent activity</li>
+          <li>Misuse of the Platform</li>
+        </ul>
+
+        <h3>Termination</h3>
+        <p>We may suspend or terminate your account at any time. There are no refunds for paid services.</p>
+
+        <h3>Governing Law &amp; Venue</h3>
+        <p>This agreement is governed by Florida law. All disputes must be resolved in Hillsborough County, Florida.</p>
+
+        <h3>Arbitration</h3>
+        <p>Most disputes must go to arbitration before the AAA in Hillsborough County. Some exceptions apply for injunctive relief.</p>
+
+        <h3>Jury &amp; Class Action Waiver</h3>
+        <p>You waive the right to:</p>
+        <ul>
+          <li>A jury trial</li>
+          <li>Participation in class actions</li>
+        </ul>
+
+        <h3>Legal Notices</h3>
+        <p>We will notify you by email. You must notify us by certified mail or overnight courier.</p>
+
+        <h3>Other Legal Terms</h3>
+        <ul>
+          <li>This agreement may be signed electronically.</li>
+          <li>If any part is found invalid, the rest still applies.</li>
+          <li>These terms may be updated at any time.</li>
+        </ul>
+
+        <div class="highlight-box" style="margin-top: 36px;">
+          <p>For legal inquiries or to submit notices, contact: <strong><a href="mailto:admin@delalunaanswers.com" style="color: var(--gold); text-decoration: none;">admin@delalunaanswers.com</a></strong></p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PRIVACY POLICY ── -->
+    <section id="privacy" class="page">
+      <div class="doc-header">
+        <h2>Privacy Policy</h2>
+        <div class="meta">Delaluna Answers LLC &nbsp;·&nbsp; Effective upon use</div>
+      </div>
+      <div class="content">
+
+        <p>By accessing and using the Delaluna Answers Platform, you agree to the terms of this Privacy Policy.</p>
+
+        <h3>Age Restriction</h3>
+        <div class="highlight-box">
+          <p>Do not use our Platform or provide us with any information if you are <strong>under 18 years of age</strong>.</p>
+        </div>
+
+        <h3>Business Purpose</h3>
+        <p>The Delaluna Answers app offers content related to astrology, relationships, and lifestyle. We collect Personal Information to:</p>
+        <ul>
+          <li>Set up your account</li>
+          <li>Provide app features</li>
+          <li>Maintain internal operations</li>
+        </ul>
+        <p>You may receive optional emails. You can opt-in or opt-out at account creation.</p>
+        <p><strong>We do not sell or lease User data.</strong></p>
+
+        <h3>Personal Information Collected</h3>
+        <p>We may collect:</p>
+        <ul>
+          <li>Name, email, password, birthdate/time/place, location</li>
+          <li>Device, browser, and IP information</li>
+          <li>Communication content</li>
+          <li>Social features and search history</li>
+        </ul>
+        <p>You are responsible for the accuracy of your data. We do not accept harmful, deceptive, or unauthorized third-party data.</p>
+
+        <h3>Data Use &amp; Sharing</h3>
+        <p>We may share data with:</p>
+        <ul>
+          <li>Internal team and consultants</li>
+          <li>Accountants, lawyers, and developers</li>
+          <li>Data, storage, and payment providers</li>
+        </ul>
+        <p>We may also disclose data to law enforcement or for fraud protection. Your data may be processed in the U.S.</p>
+
+        <h3>Data Security</h3>
+        <p>We use reasonable safeguards. Data is stored via Firebase (Google). Deletion of the app may delete your data. No backups are provided during development.</p>
+
+        <h3>Data Retention</h3>
+        <p>Your Personal Information is retained:</p>
+        <ul>
+          <li>As long as your consent is valid</li>
+          <li>As long as necessary for a contract</li>
+          <li>Until consent is revoked</li>
+          <li>As long as there is a legitimate purpose</li>
+        </ul>
+        <div class="highlight-box">
+          <p>You may <strong>request access, correction, or deletion</strong> of your data at: <a href="mailto:admin@delalunaanswers.com" style="color: var(--gold); text-decoration: none;">admin@delalunaanswers.com</a></p>
+        </div>
+
+        <h3>Truthfulness &amp; Liability</h3>
+        <p>You agree not to share false or unauthorized data. You agree to indemnify the Company and its partners against any misuse of data.</p>
+
+        <h3>California Do Not Track Notice</h3>
+        <p>We do not respond to Do Not Track signals. Third-party services (e.g., Google Analytics) may track you independently.</p>
+
+        <h3>Cookie Policy</h3>
+        <p>Cookies may be used to:</p>
+        <ul>
+          <li>Improve experience and track usage</li>
+          <li>Remember your preferences</li>
+          <li>Serve relevant ads</li>
+        </ul>
+        <p>We use essential, functional, performance, and targeting cookies, as well as web beacons, pixels, scripts, tags, and local storage.</p>
+        <p>You can manage cookies via your browser or opt out via:</p>
+        <ul>
+          <li><strong>EEA:</strong> <a href="https://www.youronlinechoices.eu" target="_blank" rel="noopener" style="color: var(--moon);">youronlinechoices.eu</a></li>
+          <li><strong>Canada:</strong> <a href="https://youradchoices.ca/choices" target="_blank" rel="noopener" style="color: var(--moon);">youradchoices.ca/choices</a></li>
+          <li><strong>US/Global:</strong> <a href="https://aboutads.info/choices" target="_blank" rel="noopener" style="color: var(--moon);">aboutads.info/choices</a>, <a href="https://optout.networkadvertising.org" target="_blank" rel="noopener" style="color: var(--moon);">optout.networkadvertising.org</a></li>
+        </ul>
+
+        <h3>International Users</h3>
+        <div class="highlight-box">
+          <p>Our Platform is intended for <strong>U.S. users only</strong>. If you reside in the EU or elsewhere with special data protection laws, please contact us before using the app or sharing personal data.</p>
+        </div>
+
+        <p style="margin-top: 32px; font-size: 13px; color: rgba(180,150,255,0.45);">We may update this Privacy Policy at any time without notice.</p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2024 Delaluna Answers LLC &nbsp;·&nbsp; <a href="mailto:admin@delalunaanswers.com">admin@delalunaanswers.com</a></p>
+  </footer>
+
+  <script>
+    function showPage(id, btn) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
